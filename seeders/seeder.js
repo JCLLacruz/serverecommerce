@@ -39,8 +39,8 @@ const seedUsers = async () => {
     }
     const seedProducts = async () => {
         const pokemons = await axios.get('https://pokeapi.co/api/v2/pokemon/');
-        
-        for (let i = 0; i < 20; i++) {
+
+        pokemons.forEach(poekmon => {
             const password = await bcrypt.hash('holahola', 10);
             const product = new Product({
                 
@@ -51,6 +51,8 @@ const seedUsers = async () => {
             const comment = new Comment({
                 
             })
+
+        })
         }
 
     mongoose.connection.close();
