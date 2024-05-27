@@ -34,7 +34,7 @@ const ProductController = {
 		try {
 			const { page = 1, limit = 10 } = req.query;
 			const Products = await Product.find()
-			.populate('LikeIds.UserId')
+			.populate('LikeIds.UserId','CommentIds')
 			.limit(limit)
 			.skip((page - 1) * limit);
 			res.send({msg: 'All Products', Products});
