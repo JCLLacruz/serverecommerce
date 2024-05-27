@@ -11,6 +11,10 @@ const ProductSchema = new mongoose.Schema({
         required: [true, 'Please enter a body'],
     },
     image_path: String,
+    price: {
+        type: Number,
+        required: [true, 'Please enter a body'],
+    },
     OrderId: {
         type: ObjectId,
         ref: 'Order'
