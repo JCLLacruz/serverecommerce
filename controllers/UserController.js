@@ -9,7 +9,11 @@ const UserController = {
 	async register(req, res) {
 		try {
 			console.log(req.body);
-			if (req.file) req.body.profileImg = req.file.filename;
+			if(!req.file){
+				req.body.profileImg = 'nonProfileImage';
+			} else {
+				req.body.profileImg = req.file.filename;
+			};
 			if (
 				req.body.username == '' ||
 				req.body.email == '' ||
@@ -27,7 +31,7 @@ const UserController = {
 				role: 'user',
 				emailConfirmed: false,
 				online: false,
-				image_path: req.file.filename,
+				image_path: req.file != undefined ? req.file.filename : 'nonProfileImage',
 			});
 			const emailToken = jwt.sign({ email: req.body.email }, JWT_SECRET, { expiresIn: '48h' });
 			const url = 'http://localhost:3001/users/confirm/' + emailToken;
