@@ -38,7 +38,7 @@ const UserController = {
 			await transporter.sendMail({
 				to: req.body.email,
 				subject: 'Please confirm your email.',
-				html: `<h3> Welcome to NeverBoringNetwork, only one step more to enjoy!</h3>
+				html: `<h3> Welcome to the Pokeshop, only one step more to enjoy!</h3>
 				<a href=${url}>Click to confirm your email</a>`,
 			});
 			res.status(201).send({ msg: `The user's email must be confirmed.`, user });
