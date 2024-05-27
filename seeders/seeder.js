@@ -1,4 +1,5 @@
-// seeder.js
+require('dotenv').config();
+const {MONGO_URI} = process.env;
 const mongoose = require('mongoose');
 const faker = require('faker');
 const bcrypt = require('bcryptjs');
@@ -7,9 +8,8 @@ const User = require('../models/User');
 const Comment = require('../models/Comment');
 const Product = require('../models/Product');
 const { dbConnection } = require('../config/config');
-require('dotenv').config();
-const {MONGO_URI} = process.env;
 
+const MONGODB_URI = 'your_mongodb_uri_here';
 
 dbConnection();
 
@@ -52,6 +52,11 @@ const getPokemon = async (id) => {
     }
 };
 
+const getHighQualityImage = (id) => {
+    const formattedId = String(id).padStart(3, '0');
+    return `https://assets.pokemon.com/assets/cms2/img/pokedex/full/${formattedId}.png`;
+};
+
 const seedProducts = async () => {
     const products = [];
     for (let i = 1; i <= 100; i++) {
@@ -60,9 +65,9 @@ const seedProducts = async () => {
             const product = new Product({
                 productName: pokemon.name,
                 description: `Height: ${pokemon.height}, Weight: ${pokemon.weight}, Base Experience: ${pokemon.base_experience}`,
-                image_path: `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${pokemon.id}.png`, // URL de la imagen del Pokémon
-                status: 'available',
+                image_path: getHighQualityImage(pokemon.id),
                 price: pokemon.id * 0.84,
+                status: 'available',
                 TagIds: [],
                 LikeIds: [],
                 CommentIds: [],
@@ -87,7 +92,6 @@ const seedComments = async (users, products) => {
         });
         const savedComment = await comment.save();
 
-        // Actualiza las referencias en el usuario y el producto
         user.CommentIds.push(savedComment._id);
         await user.save();
 

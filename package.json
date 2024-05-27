@@ -1,5 +1,5 @@
 {
-  "name": "neverboringnetwork",
+  "name": "myfirstecommerce",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -11,7 +11,7 @@
     "seeder": "node ./seeders/seeder.js"
   },
   "keywords": [],
-  "author": "Juanjo and Juan Carlos",
+  "author": "Juan Carlos",
   "license": "ISC",
   "dependencies": {
     "axios": "^1.7.2",

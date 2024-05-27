@@ -13,8 +13,8 @@ const ProductSchema = new mongoose.Schema({
     image_path: String,
     price: {
         type: Number,
-        required: [true, 'Please enter a body'],
-    },
+        required: [true, 'Please enter a body'],},
+
     OrderId: {
         type: ObjectId,
         ref: 'Order'
