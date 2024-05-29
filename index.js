@@ -18,6 +18,7 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 
 app.use('/users', require('./routes/users.js'));
 app.use('/products', require('./routes/products.js'));
+app.use('/orders', require('./orders/orders.js'));
 app.use('/tags', require('./routes/tags.js'));
 app.use('/comments', require('./routes/comments.js'));
 
