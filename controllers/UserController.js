@@ -112,7 +112,7 @@ const UserController = {
 	async logout(req, res) {
 		try {
 			const user = await User.findByIdAndUpdate(
-				{ _id: req.params._id },
+				{ _id: req.user._id },
 				{ $pull: { tokens: { token: req.headers.authorization } }, $set: { online: false } },
 				{ new: true }
 			);
