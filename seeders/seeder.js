@@ -66,11 +66,12 @@ const seedProducts = async () => {
                 productName: pokemon.name,
                 description: `Height: ${pokemon.height}, Weight: ${pokemon.weight}, Base Experience: ${pokemon.base_experience}`,
                 image_path: getHighQualityImage(pokemon.id),
-                price: pokemon.id * 0.84,
+                price: pokemon.id * 0.8,
                 status: 'available',
                 TagIds: [],
                 LikeIds: [],
                 CommentIds: [],
+                OrderIds: [],
             });
             const savedProduct = await product.save();
             products.push(savedProduct);

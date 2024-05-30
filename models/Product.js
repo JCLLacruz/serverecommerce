@@ -15,10 +15,10 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         required: [true, 'Please enter a body'],},
 
-    OrderId: {
+    OrderIds: [{
         type: ObjectId,
         ref: 'Order'
-    },
+    }],
     status: String,
     TagIds: [{
         TagId: {type: ObjectId, ref: 'Tag'}
