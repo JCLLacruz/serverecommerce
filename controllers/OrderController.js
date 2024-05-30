@@ -5,12 +5,12 @@ const User = require('../models/User');
 const OrderController = {
 	async create(req, res) {
 		try {
-			const order = await Order.create({...req.body,UserId: req.user._id});
+			const order = await Order.create({ ...req.body, UserId: req.user._id });
 			await User.findByIdAndUpdate(req.user._id, { $push: { OrderIds: order._id } });
 			req.body.ProductIds.forEach(async (ProductId) => {
 				await Product.findByIdAndUpdate(ProductId, { $push: { OrderIds: order._id } });
 			});
-			res.status(201).send({msg: 'Order created',order});
+			res.status(201).send({ msg: 'Order created', order });
 		} catch (error) {
 			console.error(error);
 			res.status(500).send({ msg: 'There was a problem creating the order' });
@@ -40,8 +40,8 @@ const OrderController = {
 	},
 	async getAll(req, res) {
 		try {
-			const orders = await Order.find()
-			res.send(orders);
+			const orders = await Order.find().populate('ProductIds');
+			res.send({ msg: 'All orders', orders});
 		} catch (error) {
 			console.error(error);
 		}

@@ -169,9 +169,14 @@ const UserController = {
 	},
 	async userInfo(req, res) {
 		const user = await User.findById(req.user._id).populate({
-			path: 'productIds',
 			populate: {
-				path: 'commentIds',
+				path: 'CommentIds',
+			},
+			populate: {
+				path: 'OrderIds',
+				populate: {
+					path: 'ProductIds',
+				}
 			},
 			path: 'TagIds',
 			path: 'FollowerIds',
