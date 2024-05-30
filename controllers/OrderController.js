@@ -6,7 +6,7 @@ const OrderController = {
 	async create(req, res) {
 		try {
 			const order = await Order.create({ ...req.body, UserId: req.user._id });
-			await User.findByIdAndUpdate(req.user._id, { $push: { OrderIds: order._id } });
+			await User.findByIdAndUpdate(req.user._id, { $push: { OrderIds: order._id} });
 			req.body.ProductIds.forEach(async (ProductId) => {
 				await Product.findByIdAndUpdate(ProductId, { $push: { OrderIds: order._id } });
 			});

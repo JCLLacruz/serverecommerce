@@ -16,9 +16,7 @@ const UserSchema = new mongoose.Schema(
 		online: Boolean,
 		image_path: String,
 		OrderIds: [
-			{
-				OrderId: { type: ObjectId, ref: 'Order' },
-			},
+		{ type: ObjectId, ref: 'Order' },
 		],
 		FollowerIds: [{ FollowerId: { type: ObjectId, ref: 'User' } }],
 		FollowIds: [{ FollowId: { type: ObjectId, ref: 'User' } }],

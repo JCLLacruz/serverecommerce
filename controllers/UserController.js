@@ -9,11 +9,11 @@ const UserController = {
 	async register(req, res) {
 		try {
 			console.log(req.body);
-			if(!req.file){
+			if (!req.file) {
 				req.body.profileImg = 'nonProfileImage';
 			} else {
 				req.body.profileImg = req.file.filename;
-			};
+			}
 			if (
 				req.body.username == '' ||
 				req.body.email == '' ||
@@ -168,20 +168,19 @@ const UserController = {
 		}
 	},
 	async userInfo(req, res) {
-		const user = await User.findById(req.user._id).populate({
+		const user = await User.findById(req.user._id)
+		.populate({
+			path: 'OrderIds',
 			populate: {
-				path: 'CommentIds',
+				path: 'ProductIds',
 			},
 			populate: {
-				path: 'OrderIds',
-				populate: {
-					path: 'ProductIds',
-				}
+			path: 'CommentIds',
 			},
 			path: 'TagIds',
 			path: 'FollowerIds',
 			path: 'FollowIds',
-		});
+		})
 		res.send({ msg: 'User info:', user });
 	},
 	async recoverPassword(req, res) {
@@ -208,7 +207,7 @@ const UserController = {
 	async resetPassword(req, res) {
 		try {
 			const recoverToken = req.params.recoverToken;
-			const payload = jwt.verify(recoverToken,JWT_SECRET);
+			const payload = jwt.verify(recoverToken, JWT_SECRET);
 			await User.findOneAndUpdate({ email: payload.email }, { password: req.body.password });
 			res.send({ msg: 'Password was changed' });
 		} catch (error) {
