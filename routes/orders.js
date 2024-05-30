@@ -5,7 +5,7 @@ const { authentication, isAuthor, isAdmin } = require('../middleware/authenticat
 const {uploadCommentImages} = require('../middleware/multer.js')
 
 router.post('/', authentication, );
-router.put('/id/:_id', authentication, isAuthor, );
+router.put('/id/:_id', authentication, isAdmin, );
 router.delete('/id/:_id', authentication, isAdmin, );
 router.get('/', authentication, );
 
