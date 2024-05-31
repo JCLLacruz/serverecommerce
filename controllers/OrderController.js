@@ -5,7 +5,7 @@ const User = require('../models/User');
 const OrderController = {
 	async create(req, res) {
 		try {
-			const order = await Order.create({ ...req.body, UserId: req.user._id });
+			const order = await Order.create({ ...req.body, UserId: req.user._id, state: 'pendinng' });
 			await User.findByIdAndUpdate(req.user._id, { $push: { OrderIds: order._id} });
 			req.body.ProductIds.forEach(async (ProductId) => {
 				await Product.findByIdAndUpdate(ProductId, { $push: { OrderIds: order._id } });
