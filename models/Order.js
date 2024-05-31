@@ -10,7 +10,7 @@ const OrderSchema = new mongoose.Schema({
         type: ObjectId,
         ref: 'User'
     },
-    state: String,
+    status: {type: String},
 }, { timestamps: true });
 
 const Order = mongoose.model('Order', OrderSchema);
