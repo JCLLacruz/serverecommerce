@@ -174,7 +174,7 @@ const UserController = {
 			populate: {
 				path: 'ProductIds',
 			},
-		}).populate('CommentIds');
+		});
 		res.send({ msg: 'User info:', user });
 	},
 	async recoverPassword(req, res) {
