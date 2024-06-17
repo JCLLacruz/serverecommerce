@@ -4,7 +4,13 @@ const User = require('../models/User');
 const ProductController = {
 	async create(req, res) {
 		try {
-			if (req.file) req.body.profileImg = req.file.filename;
+			if (!req.file) {
+				req.body.profileImg = 'nonProductImage';
+			} else if(req.body.image_path != ''){
+				req.body.image_path = req.body.image_path;			
+			} else {
+				req.body.profileImg = req.file.filename;
+			}
 			const product = await Product.create({ ...req.body, image_path: req.file.filename });
 			res.status(201).send({msg: 'Product is created',product});
 		} catch (error) {
