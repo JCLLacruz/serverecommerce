@@ -11,7 +11,7 @@ const ProductController = {
 			} else {
 				req.body.profileImg = req.file.filename;
 			}
-			const product = await Product.create({ ...req.body, image_path: req.file.filename });
+			const product = await Product.create({ ...req.body, image_path: req.body.image_path || req.file.filename});
 			res.status(201).send({msg: 'Product is created',product});
 		} catch (error) {
 			console.error(error);
